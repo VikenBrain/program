@@ -59,6 +59,7 @@ data_cdn.drop_duplicates('query_string', 'first', inplace=True) # 去重
 
     ```python
     data['uri'] = data.uri.apply(func = lambda x:x.split("/")[2])
+    data_line['http_range'] = data_line['http_range'].map(lambda x:x.split('-')[0])
     ```
 
 - 正则提取
