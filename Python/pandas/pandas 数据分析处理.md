@@ -64,58 +64,11 @@ data_cdn.drop_duplicates('query_string', 'first', inplace=True) # 去重
 
 - 正则提取
 
-    - 这种方法的弊端就是破坏了DataFrame的数据结构
+    - 解决破坏DataFrame的数据结构的方式
 
     ```python
-    uas={}
-    import re
-    gifmaker = re.compile("(\w/com\.\w+\.\w+/\d+.\d+).*")
-    nul = re.compile("(/NULL/).*")
-    kwai = re.compile("(kwai\w*/\w+/\w+/\w+.\w+).*")
-    kwai2 = re.compile("(kwai\w*/\w+/\w+.\w+).*")
-    Mozilla = re.compile("(Mozilla/\d+\.\d+).*")
-    dalvik = re.compile("(Dalvik/\w+.\w+.\w+)")
-    
-    def  func(line):
-        ua = line
-    
-        m = gifmaker.match(ua)
-        if m:
-            ua = m.group(1)
-    
-        m = nul.match(ua)
-        if m:
-            ua = m.group(1)
-        m = kwai.match(ua)
-        if m:
-            ua = m.group(1)
-        m = kwai2.match(ua)
-        if m:
-            ua = m.group(1)
-    
-        m = Mozilla.match(ua)
-        if m:
-            ua = m.group(1)
-    
-        m = dalvik.match(ua)
-        if m:
-            ua = m.group(1)
-    
-        if ua not in uas:
-            uas[ua] = 1
-        else:
-            uas[ua] += 1
-    
-        return line
-    
-    data['http_user_agent'].apply(func)
-    
-    print(uas)
+	data['header_x_cdn_user_agent'] = data['header_x_cdn_user_agent'].str.replace(r'(Mozilla/\d+\.\d+ \(Linux; Android 10;.*?).*', 'Mozilla_50_Linux_Android_10')
     ```
-
-    
-
-
 
 #### 04 特征名重命名
 
