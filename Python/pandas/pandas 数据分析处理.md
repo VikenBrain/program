@@ -90,16 +90,21 @@ heartbeat_data['nls_ts'] = heartbeat_data['nls_ts'].astype('int')
 heartbeat_data['nls_ts'] = heartbeat_data['nls_ts'].astype(int) 对数字模式的字符串进行转化
 ```
 
-#### 06 特征值替换
+#### 06 特征列中特征值分类替换
 
 ```python
-# 这里是只能替代字符串为数字，而不能替代数字为数字
+# 字符串数值化
 f_data['refer'] = f_data.refer.apply(func=lambda x:x.replace('360_router_p4g','0'))
 ```
 
 ```python
- # 对ab_time中的数值进行数字等级替换,这里暂时只能做到一层替换
+ # 条件替换
  data['abTime'] = data['abTime'].map(lambda x:0 if x<=200 else 1)
+```
+
+```python
+# 字符串(文本)正则替换
+data['header_x_cdn_user_agent'] = data['header_x_cdn_user_agent'].str.replace(r'(Mozilla/\d+\.\d+ \(Linux; Android 10.*)', 'Android 10')、
 ```
 
 
@@ -195,13 +200,20 @@ f_data['avgspeed'] = pd.cut(f_data['avgspeed'], range_data, right=False, labels=
 #### 17 面向对象数据导入
 
 ```python
- # 通过时间判断文件是否已经存在，如果文件存在，就不用重复下载了
- download_data = "{}_{}.csv".format(MDEL()[2], base_cons.basic()[2]) 
- 
- if os.path.exists(download_data): 
-     print("我们的勇气绝对不能动摇！")
- else:
-     miner_diapatch_error_list.MDEL().start() # 调用数据的接口
+# 通过时间判断文件是否已经存在，如果文件存在，就不用重复下载了
+download_data = "{}_{}.csv".format(MDEL()[2], base_cons.basic()[2])  
+if os.path.exists(download_data): 
+    print("我们的勇气绝对不能动摇！")
+else:
+    miner_diapatch_error_list.MDEL().start() # 调用数据的接口
+        
+# 自动化数据计算版本
+while True：
+	time.sleep(120)	
+    
+    if os.path.exists(download_data_error_list or download_data_a) is True:
+        os.remove(download_data_error_list)
+        os.remove(download_data_a) # 加入文本存在,就删除文本
 ```
 
 #### 18 时间转化
@@ -249,5 +261,5 @@ print(data)
 3 -0.847264 -0.744622
 ```
 
-
+#### 
 
