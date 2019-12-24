@@ -21,9 +21,7 @@ GitHub在线上传文件夹
 首次：通过git工具上传本地文件夹（本地项目）
 
 ```python
-
 git add . # 将文件提交到暂缓区(.号可以用具体文件替代)
-
 # 提交到版本库
 git remote add origin https://github.com/VikenBrain/Machinelearning.git # GitHub地址
 git pull --rebase origin master # 将文件合并（因为github上面有个readme文件）
@@ -41,9 +39,7 @@ git push origin master # 以后的推送
 
 
 
-​    
-
-为了更好地使用git，我们同事记录每一个施加修改的人
+  为了更好地使用git，我们同事记录每一个施加修改的人
 
 ```python
 git config -global user.name "viken"
@@ -76,12 +72,6 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-一次性添加文件夹中所有未被添加的文件
-
-```python
-git add .
-```
-
 提交改变（commit）
 
 ```python
@@ -98,6 +88,14 @@ commit 13be9a7bf70c040544c6242a494206f240aac03c
 Author: Morvan Zhou <mz@email.com>
 Date:   Tue Nov 29 00:06:47 2016 +1100
     create 1.py # 这是我们上节课记录的修改信息
+    
+    
+```
+
+回退版本：
+
+```python
+git reset --hard xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 
